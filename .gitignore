@@ -1,0 +1,6 @@
+/.idea
+/code/*
+/php/*
+/mysql/data/*
+
+!/**/.gitkeep

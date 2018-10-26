@@ -1,0 +1,26 @@
+version: '2'
+services:
+    web:
+        image: nginx:stable-alpine
+        ports:
+            - "80:80"
+        volumes:
+            - ./code:/code
+            - ./site.conf:/etc/nginx/conf.d/site.conf
+        links:
+            - php
+    php:
+        image: sonbui00/docker-php-fpm-alpine-magento2:latest
+        volumes:
+            - ./code:/code
+        links:
+            - mysql
+    mysql:
+        image: yobasystems/alpine-mariadb
+        environment:
+            MYSQL_ROOT_PASSWORD: toor
+            MYSQL_DATABASE: magento
+            MYSQL_USER: magento
+            MYSQL_PASSWORD: magento
+        volumes:
+            - ./mysql/data:/var/lib/mysql
